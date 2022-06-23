@@ -1,9 +1,15 @@
+import React from "react";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   return (
     <>
-      <h1>Crypto App</h1>
+      <section className="body-section">
+        <SearchBar />
+      </section>
+
     </>
+    
   );
 }
 
