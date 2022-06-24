@@ -6,7 +6,7 @@ import { useFetch } from "./useFetch";
 const url = '';
 
 const MainCrypto = ({name, price, points, percentage}) => {
-    const [crypto] = useFetch(url);
+    const {crypto} = useFetch(url);
     return (
         <article className="main-crypto">
             <ul>
