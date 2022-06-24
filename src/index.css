@@ -69,7 +69,7 @@ body{
 
 
 .pop-cryptos{
-  height: 60vh;
+  height: 40vh;
   margin-bottom: 2vh;
   margin-top: 16vh;
   color: white;
@@ -79,6 +79,7 @@ body{
 .stock-data{
   background-color: rgb(28, 28, 33);
   border-radius: 1.2rem;
+  width: 20rem;
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
@@ -194,6 +195,37 @@ body{
 
 .search-box #input-box:focus::placeholder {
   color: transparent;
+}
+
+
+@media (min-width: 750px)  {
+  
+  .pop-cryptos {
+      height: 40vh;
+      display: flex;
+      flex-wrap: wrap;
+  }
+
+  .stock-data {
+      margin-left: 1rem;
+      width: 22rem;
+  }
+  .nums-div {
+    margin-top: 1rem;
+  }
+
+  .name-div {
+    font-size: 2.2rem;
+  }
+}
+
+
+@media (min-width: 1025px) {
+
+  .stock-data {
+      height: 7rem;
+      width: 26rem;
+    }
 }
 
 

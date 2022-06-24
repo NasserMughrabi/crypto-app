@@ -33,7 +33,7 @@ const SearchBar = () => {
             <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossOrigin="anonymous"></link>
             <header className="search-bar">
                 <div className="search-box pheight">
-                    <form action="" onSubmit={(e) => {handleSubmit()}}>
+                    <form action="" onSubmit={handleSubmit}>
                         <div className="search-btn pheight" href="#" onClick={()=> {displaySearchBox()}}>
                             <i ref={inputEl} className="fa fa-search" ></i>
                         </div>
