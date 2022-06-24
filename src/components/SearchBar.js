@@ -73,10 +73,9 @@ const SearchBar = () => {
                     </div>
                     <input ref={inputEl} spellCheck="false" type="text" className="pheight" id="input-box" placeholder="Search for crypto" autoCapitalize="on" style={{width:'0px'}} ></input>
                 </div>
-                
             </header>
-            <MainCrypto {...mainCrypto}/>
-            <PopCryptos popCryptos={popCryptos}/>
+            <MainCrypto />
+            <PopCryptos />
         </>
     );
 }

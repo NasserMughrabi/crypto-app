@@ -1,16 +1,20 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export const useFetch = (url) => {
-  const [products, setProducts] = useState([]);
+export const useFetch = (url, keys) => {
+    const [crypto, setCrypto] = useState([]);
 
-  const getProducts = useCallback(async () => {
-    const response = await fetch(url);
-    const products = await response.json();
-    setProducts(products);
-  }, [url]);
+    const getProducts = useCallback(async () => {
+    const response = await fetch(url, keys);
+    const result = await response.json();
+    setCrypto(result);
+    }, [url]);
 
-  useEffect(() => {
-    getProducts();
-  }, [url, getProducts]);
-  return {products};
+    useEffect(() => {
+        getProducts();
+    }, [url, getProducts]);
+
+    
+
+
+    return {crypto};
 };
