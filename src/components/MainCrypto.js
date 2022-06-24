@@ -12,13 +12,13 @@ const keys = {
 	}
 };
 
-const MainCrypto = () => {
+const MainCrypto = ({cryptoName}) => {
     const {crypto} = useFetch(url, keys);
     if(!crypto.data){
         return;
     }
-    const mainCrypto = crypto.data.coins.filter(item => item.name === 'Bitcoin');
-    const {uuid, name, symbol, color, price, change} = mainCrypto[0];
+    const mainCrypto = crypto.data.coins.filter(item => item.name === cryptoName);
+    const {uuid, name, color, price, change} = mainCrypto[0];
 
     // price color
     let hexColor = color;
@@ -30,7 +30,7 @@ const MainCrypto = () => {
     
 
     return (
-        <article className="main-crypto">
+        <article key={uuid} className="main-crypto">
             <ul>
                 <li className="name-li">{name}</li>
                 <li style={{color:hexColor}} className="price-li">{parseFloat(price).toFixed(1)}</li>
@@ -39,7 +39,6 @@ const MainCrypto = () => {
                         {color==='#3C3C3D' ? <FaLongArrowAltUp style={{color:'green'}} /> : <FaLongArrowAltDown style={{color:'red'}} /> }
                     </div>
                     <div id="percentage-div">{change}%</div>
-                    {/* <div id="points-div">{change}</div> */}
                 </li>
             </ul>
         </article>

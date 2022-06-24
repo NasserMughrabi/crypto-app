@@ -1,6 +1,5 @@
 import React from "react";
 import { FaLongArrowAltUp, FaLongArrowAltDown } from "react-icons/fa";
-import { keyframes } from "styled-components";
 import { useFetch } from "./useFetch";
 
 
@@ -26,9 +25,8 @@ const PopCryptos = () => {
     return (
         <article className="pop-cryptos">
             {cryptoArr.map((cryptoObj) => {
-                const {uuid, name, symbol, color, price, change} = cryptoObj;
-                // console.log(uuid, name, symbol, color, price, change);
-                // // price color
+                const {uuid, name, color, price, change} = cryptoObj;
+                // price color
                 let hexColor = color;
                 if(hexColor === '#3C3C3D') {
                     hexColor = '#008000';
@@ -44,7 +42,6 @@ const PopCryptos = () => {
                                 {color==='#3C3C3D' ? <FaLongArrowAltUp style={{color:'green'}} /> : <FaLongArrowAltDown style={{color:'red'}} /> }
                             </div>
                             <div className="percentage-div">{change}%</div>
-                            {/* <div className="points-div">{change}</div> */}
                         </div>
                     </div>
                 );

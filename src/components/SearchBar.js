@@ -5,44 +5,7 @@ import PopCryptos from "./PopCryptos";
 
 const SearchBar = () => {
     
-    const defaultCrypto = {
-        name:'Bitcoin',
-        price:'20375',
-        points:'1340',
-        percentage:'3.2'
-    };
-    const defaultPopCryptos = [
-        {
-            id: 1,
-            name:'Bitcoin',
-            price:'20375',
-            points:'1340',
-            percentage:'3.2',
-        }, 
-        {
-            id: 2,
-            name:'Etheruim',
-            price:'845',
-            points:'54',
-            percentage:'0.2',
-        },
-        {
-            id: 3,
-            name:'Dogecoin',
-            price:'0.0254',
-            points:'0.02',
-            percentage:'1.5'
-        },
-        {
-            id: 4,
-            name:'Plata',
-            price:'0.00032',
-            points:'0.0003',
-            percentage:'0.21'
-        },
-    ];
-    const [mainCrypto, setMainCrypto] = useState(defaultCrypto);
-    const [popCryptos, setPopCryptos] = useState(defaultPopCryptos);
+    const [mainCrypto, setMainCrypto] = useState('Bitcoin');
     const inputEl = useRef(null);
 
     const handleClick = () => {
@@ -74,7 +37,7 @@ const SearchBar = () => {
                     <input ref={inputEl} spellCheck="false" type="text" className="pheight" id="input-box" placeholder="Search for crypto" autoCapitalize="on" style={{width:'0px'}} ></input>
                 </div>
             </header>
-            <MainCrypto />
+            <MainCrypto cryptoName={mainCrypto}/>
             <PopCryptos />
         </>
     );
