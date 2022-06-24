@@ -1,4 +1,5 @@
 import React from "react";
+import { FaLongArrowAltUp, FaLongArrowAltDown } from "react-icons/fa";
 
 
 const PopCryptos = ({popCryptos}) => {
@@ -11,6 +12,7 @@ const PopCryptos = ({popCryptos}) => {
                         <div className="name-div">{name}</div>
                         <div className="nums-div">
                             <div className="price-div">{price}</div>
+                            <div className="arrow-div"><FaLongArrowAltUp /></div>
                             <div className="percentage-div">{percentage}</div>
                             <div className="points-div">({points})</div>
                         </div>

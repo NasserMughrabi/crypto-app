@@ -21,7 +21,7 @@ body{
 .search-bar {
   /* background-color: red; */
   height: 10vh;
-  margin: 2vh 10vw;
+  margin: 2vh 2vw;
   align-items: left;
   text-align: left;
 }
@@ -54,18 +54,28 @@ body{
   font-size: 4rem;
 }
 
-.points-li{
+.points-perc-li #points-div{
+  display: inline;
+  margin-left: 1rem;
+  font-size: 2.2rem;
 
 }
 
-.percentage-li{
+.points-perc-li #percentage-div{
+  display: inline;
+  font-size: 2.2rem;
+}
+
+#arrow{
+  display: inline;
+  color: green;
 }
 
 
 .pop-cryptos{
-  height: 40vh;
-  margin: 8vh 0vw;
-  margin-top: 10vh;
+  height: 60vh;
+  margin-bottom: 2vh;
+  margin-top: 16vh;
   color: white;
   font-size: 1.75rem;
 }
@@ -98,15 +108,20 @@ body{
   font-size: 2.5rem;
 }
 
-.points-div {
+.arrow-div {
   margin-left: 1rem;
   padding-top: 0.6rem;
-
+  color: green;
 }
 
 .percentage-div {
-  margin-left: 1rem;
   padding-top: 0.6rem;
+}
+
+.points-div {
+  margin-left: 0.8rem;
+  padding-top: 0.6rem;
+
 }
 
 .search-box {
@@ -114,6 +129,9 @@ body{
 }
 
 .search-box .search-btn {
+  /* color: rgb(117, 3, 223);  */
+  color: white;
+  background-color: transparent;
   position: absolute;
   display: block;
   display: -webkit-box;
