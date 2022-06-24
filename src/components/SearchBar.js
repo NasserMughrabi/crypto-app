@@ -11,6 +11,7 @@ const SearchBar = () => {
     const inputEl = useRef(null);
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         if(inputEl.current.value){
             setMainCrypto(inputEl.current.value);
         }
