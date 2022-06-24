@@ -4,14 +4,6 @@ import { useFetch } from "./useFetch";
 
 let color = '';
 let oneHChangeIcon = '';
-const url = 'https://live-crypto-prices.p.rapidapi.com/pricefeed';
-const keys = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '8aec22813cmshca054c4ac68e851p105dddjsn73de4b979d9b',
-		'X-RapidAPI-Host': 'live-crypto-prices.p.rapidapi.com'
-	}
-};
 
 const selectColorAndIcon = (OneHChange) => {
     if(OneHChange.startsWith('-') && OneHChange !== '-0.0%') {
@@ -37,7 +29,7 @@ const selectColorAndIcon = (OneHChange) => {
 const PopCryptos = () => {
 
     const popCryptos = ['ethereum', 'dogecoin', 'cardano', 'litecoin'];
-    const crypto = useFetch(url, keys);
+    const crypto = useFetch();
     if(!crypto.crypto.result){
         return;
     }
