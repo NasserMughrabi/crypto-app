@@ -219,12 +219,11 @@ body{
   }
 }
 
-
 @media (min-width: 1025px) {
 
   .stock-data {
       height: 7rem;
-      width: 26rem;
+      width: 28rem;
     }
 }
 

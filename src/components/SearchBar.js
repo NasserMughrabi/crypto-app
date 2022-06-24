@@ -7,6 +7,12 @@ import PopCryptos from "./PopCryptos";
 
 const SearchBar = () => {
 
+    const removetogglenav = ()=>{
+        console.log(window.innerWidth);
+    }
+
+    window.addEventListener('resize', removetogglenav);
+
     const [mainCrypto, setMainCrypto] = useState('Bitcoin');
     const inputEl = useRef(null);
 
