@@ -7,7 +7,7 @@ let oneHChangeIcon = '';
 
 const selectColorAndIcon = (OneHChange) => {
     if(OneHChange.startsWith('-') && OneHChange !== '-0.0%') {
-        color = '#ff0000'; // red
+        color = '#ff0000'; // red 
         oneHChangeIcon = <FaLongArrowAltDown style={{color:'red'}} />;
         return OneHChange = OneHChange.substring(1);
     } else if(OneHChange === '-0.0%') {
