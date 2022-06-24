@@ -3,8 +3,10 @@ import { useState, useRef } from "react";
 import MainCrypto from "./MainCrypto";
 import PopCryptos from "./PopCryptos";
 
+
+
 const SearchBar = () => {
-    
+
     const [mainCrypto, setMainCrypto] = useState('Bitcoin');
     const inputEl = useRef(null);
 

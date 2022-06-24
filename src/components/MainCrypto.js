@@ -2,43 +2,66 @@ import React from "react";
 import { FaLongArrowAltUp, FaLongArrowAltDown } from "react-icons/fa";
 import { useFetch } from "./useFetch";
 
-
-const url = 'https://coinranking1.p.rapidapi.com/coins?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=24h&tiers%5B0%5D=1&orderBy=marketCap&orderDirection=desc&limit=50&offset=0';
+let color = '';
+let oneHChangeIcon = '';
+const url = 'https://live-crypto-prices.p.rapidapi.com/pricefeed';
 const keys = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': 'b55775101cmshf7a0fdee78a5340p11b6b4jsnc627709db9a2',
-		'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
+		'X-RapidAPI-Key': '8aec22813cmshca054c4ac68e851p105dddjsn73de4b979d9b',
+		'X-RapidAPI-Host': 'live-crypto-prices.p.rapidapi.com'
 	}
 };
 
+const selectColorAndIcon = (OneHChange) => {
+    if(OneHChange.startsWith('-') && OneHChange !== '-0.0%') {
+        color = '#ff0000'; // red
+        oneHChangeIcon = <FaLongArrowAltDown style={{color:'red'}} />;
+        return OneHChange = OneHChange.substring(1);
+    } else if(OneHChange === '-0.0%') {
+        color = '#FFFFFF'; //white
+        oneHChangeIcon = '';
+        return OneHChange = OneHChange.substring(1);
+    } else if (OneHChange === '0.0%') {
+        color = '#FFFFFF'; //white
+        oneHChangeIcon = '';
+        return OneHChange;
+    } else {
+        color = '#008000'; // green
+        oneHChangeIcon = <FaLongArrowAltUp style={{color:'green'}} />;
+        return OneHChange;
+    }
+}
+
 const MainCrypto = ({cryptoName}) => {
     const {crypto} = useFetch(url, keys);
-    if(!crypto.data){
+    if(!crypto.result){
         return;
     }
-    const mainCrypto = crypto.data.coins.filter(item => item.name === cryptoName);
-    const {uuid, name, color, price, change} = mainCrypto[0];
 
-    // price color
-    let hexColor = color;
-    if(hexColor === '#3C3C3D') {
-        hexColor = '#008000';
-    } else {
-        hexColor = '#ff0000';
+    let mainCrypto = crypto.result.filter(item => item.CoinName.toLowerCase() === cryptoName.toLowerCase());
+    if(!mainCrypto[0]){
+        // crypto not supported by API
+        alert(`Sorry, '${cryptoName.charAt(0).toUpperCase() + cryptoName.slice(1)}' Crypto Is Not Supported`);
+        return;
     }
-    
+    let {Id, CoinName, Price, OneHChange} = mainCrypto[0];
+
+    // price color and percentage icon
+    OneHChange = selectColorAndIcon(OneHChange);
 
     return (
-        <article key={uuid} className="main-crypto">
+        <article key={Id} className="main-crypto">
             <ul>
-                <li className="name-li">{name}</li>
-                <li style={{color:hexColor}} className="price-li">{parseFloat(price).toFixed(1)}</li>
+                <li className="name-li">{CoinName}</li>
+                <li style={{color}} className="price-li">
+                    {parseFloat(Price.substring(1).replace(',', '')).toFixed(2)}
+                </li>
                 <li className="points-perc-li">
                     <div id="arrow">
-                        {color==='#3C3C3D' ? <FaLongArrowAltUp style={{color:'green'}} /> : <FaLongArrowAltDown style={{color:'red'}} /> }
+                        {oneHChangeIcon}
                     </div>
-                    <div id="percentage-div">{change}%</div>
+                    <div id="percentage-div">{OneHChange}</div>
                 </li>
             </ul>
         </article>

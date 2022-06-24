@@ -2,46 +2,64 @@ import React from "react";
 import { FaLongArrowAltUp, FaLongArrowAltDown } from "react-icons/fa";
 import { useFetch } from "./useFetch";
 
-
-const url = 'https://coinranking1.p.rapidapi.com/coins?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=24h&tiers%5B0%5D=1&orderBy=marketCap&orderDirection=desc&limit=50&offset=0';
+let color = '';
+let oneHChangeIcon = '';
+const url = 'https://live-crypto-prices.p.rapidapi.com/pricefeed';
 const keys = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': 'b55775101cmshf7a0fdee78a5340p11b6b4jsnc627709db9a2',
-		'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
+		'X-RapidAPI-Key': '8aec22813cmshca054c4ac68e851p105dddjsn73de4b979d9b',
+		'X-RapidAPI-Host': 'live-crypto-prices.p.rapidapi.com'
 	}
 };
 
-const PopCryptos = () => {
-    const popCryptos = ['Ethereum', 'Dogecoin', 'Cardano', 'Litecoin'];
-    const crypto = useFetch(url, keys);
-    let cryptoArr = [];
-    if(crypto.crypto.data){
-        cryptoArr = crypto.crypto.data.coins.filter(item => popCryptos.includes(item.name));
+const selectColorAndIcon = (OneHChange) => {
+    if(OneHChange.startsWith('-') && OneHChange !== '-0.0%') {
+        color = '#ff0000'; // red
+        oneHChangeIcon = <FaLongArrowAltDown style={{color:'red'}} />;
+        return OneHChange = OneHChange.substring(1);
+    } else if(OneHChange === '-0.0%') {
+        color = '#FFFFFF'; //white
+        oneHChangeIcon = '';
+        return OneHChange = OneHChange.substring(1);
+    } else if (OneHChange === '0.0%') {
+        color = '#FFFFFF'; //white
+        oneHChangeIcon = '';
+        return OneHChange;
+    } else {
+        color = '#008000'; // green
+        oneHChangeIcon = <FaLongArrowAltUp style={{color:'green'}} />;
+        return OneHChange;
     }
+}
 
 
+const PopCryptos = () => {
+
+    const popCryptos = ['ethereum', 'dogecoin', 'cardano', 'litecoin'];
+    const crypto = useFetch(url, keys);
+    if(!crypto.crypto.result){
+        return;
+    }
+    let cryptoArr = crypto.crypto.result.filter(item => popCryptos.includes(item.CoinName.toLowerCase()));
 
     return (
         <article className="pop-cryptos">
             {cryptoArr.map((cryptoObj) => {
-                const {uuid, name, color, price, change} = cryptoObj;
-                // price color
-                let hexColor = color;
-                if(hexColor === '#3C3C3D') {
-                    hexColor = '#008000';
-                } else {
-                    hexColor = '#ff0000';
-                }
+                let {Id, CoinName, Price, OneHChange} = cryptoObj;
+
+                // price color and pecentage change icon
+                OneHChange = selectColorAndIcon(OneHChange);                
+
                 return (
-                    <div key={uuid} className="stock-data">
-                        <div className="name-div">{name}</div>
+                    <div key={Id} className="stock-data" >
+                        <div className="name-div">{CoinName}</div>
                         <div className="nums-div">
-                            <div style={{color:hexColor}} className="price-div">{parseFloat(price).toFixed(2)}</div>
-                            <div className="arrow-div">
-                                {color==='#3C3C3D' ? <FaLongArrowAltUp style={{color:'green'}} /> : <FaLongArrowAltDown style={{color:'red'}} /> }
+                            <div style={{color}} className="price-div">
+                                {parseFloat(Price.substring(1).replace(',', '')).toFixed(2)}
                             </div>
-                            <div className="percentage-div">{change}%</div>
+                            <div className="arrow-div">{oneHChangeIcon}</div>
+                            <div className="percentage-div">{OneHChange}</div>
                         </div>
                     </div>
                 );

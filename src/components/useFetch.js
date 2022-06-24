@@ -13,8 +13,5 @@ export const useFetch = (url, keys) => {
         getProducts();
     }, [url, getProducts]);
 
-    
-
-
     return {crypto};
 };
