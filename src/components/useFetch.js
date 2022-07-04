@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 
-const url = 'https://live-crypto-prices.p.rapidapi.com/pricefeed';
 const keys = {
 	method: 'GET',
 	headers: {
@@ -8,7 +7,7 @@ const keys = {
 		'X-RapidAPI-Host': 'live-crypto-prices.p.rapidapi.com'
 	}
 };
-export const useFetch = () => {
+export const useFetch = (url) => {
     const [loading, setLoading] = useState(true);
     const [crypto, setCrypto] = useState([]);
 

@@ -1,6 +1,8 @@
 import React from "react";
 import { FaLongArrowAltUp, FaLongArrowAltDown } from "react-icons/fa";
 import { useFetch } from "./useFetch";
+const url = 'https://live-crypto-prices.p.rapidapi.com/pricefeed';
+
 
 let color = '';
 let oneHChangeIcon = '';
@@ -29,7 +31,7 @@ const selectColorAndIcon = (OneHChange) => {
 const PopCryptos = () => {
 
     const popCryptos = ['ethereum', 'dogecoin', 'cardano', 'litecoin'];
-    const {loading, crypto} = useFetch();
+    const {loading, crypto} = useFetch(url);
     if(!crypto.result){
         return;
     }
