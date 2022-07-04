@@ -29,34 +29,42 @@ const selectColorAndIcon = (OneHChange) => {
 const PopCryptos = () => {
 
     const popCryptos = ['ethereum', 'dogecoin', 'cardano', 'litecoin'];
-    const crypto = useFetch();
-    if(!crypto.crypto.result){
+    const {loading, crypto} = useFetch();
+    if(!crypto.result){
         return;
     }
-    let cryptoArr = crypto.crypto.result.filter(item => popCryptos.includes(item.CoinName.toLowerCase()));
+    let cryptoArr = crypto.result.filter(item => popCryptos.includes(item.CoinName.toLowerCase()));
+
+    if(loading){
+        return <><h1>Hello</h1></>
+    }
 
     return (
-        <article className="pop-cryptos">
-            {cryptoArr.map((cryptoObj) => {
-                let {Id, CoinName, Price, OneHChange} = cryptoObj;
+        <>
+        {loading ? <h1>Loading...</h1>:
+            <article className="pop-cryptos">
+                {cryptoArr.map((cryptoObj) => {
+                    let {Id, CoinName, Price, OneHChange} = cryptoObj;
 
-                // price color and pecentage change icon
-                OneHChange = selectColorAndIcon(OneHChange);                
+                    // price color and pecentage change icon
+                    OneHChange = selectColorAndIcon(OneHChange);                
 
-                return (
-                    <div key={Id} className="stock-data" >
-                        <div className="name-div">{CoinName}</div>
-                        <div className="nums-div">
-                            <div style={{color}} className="price-div">
-                                {parseFloat(Price.substring(1).replace(',', '')).toFixed(2)}
+                    return (
+                        <div key={Id} className="stock-data" >
+                            <div className="name-div">{CoinName}</div>
+                            <div className="nums-div">
+                                <div style={{color}} className="price-div">
+                                    {parseFloat(Price.substring(1).replace(',', '')).toFixed(2)}
+                                </div>
+                                <div className="arrow-div">{oneHChangeIcon}</div>
+                                <div className="percentage-div">{OneHChange}</div>
                             </div>
-                            <div className="arrow-div">{oneHChangeIcon}</div>
-                            <div className="percentage-div">{OneHChange}</div>
                         </div>
-                    </div>
-                );
-            })}
-        </article>
+                    );
+                })}
+            </article>
+        }
+        </>
     );
 }
 

@@ -3,15 +3,7 @@ import { useState, useRef } from "react";
 import MainCrypto from "./MainCrypto";
 import PopCryptos from "./PopCryptos";
 
-
-
 const SearchBar = () => {
-
-    const removetogglenav = ()=>{
-        console.log(window.innerWidth);
-    }
-
-    window.addEventListener('resize', removetogglenav);
 
     const [mainCrypto, setMainCrypto] = useState('Bitcoin');
     const inputEl = useRef(null);
@@ -19,12 +11,12 @@ const SearchBar = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(inputEl.current.value){
-            setMainCrypto(inputEl.current.value);
+            setMainCrypto(inputEl.current.value.trim());
         }
         inputEl.current.value = '';
     }
 
-    function displaySearchBox() {
+    const displaySearchBox = () => {
         let searchBox = inputEl.current;
 
         if (searchBox.style.width === "" || searchBox.style.width === "0px") {

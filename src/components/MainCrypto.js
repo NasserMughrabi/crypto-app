@@ -26,7 +26,7 @@ const selectColorAndIcon = (OneHChange) => {
 }
 
 const MainCrypto = ({cryptoName}) => {
-    const {crypto} = useFetch();
+    const {loading, crypto} = useFetch();
     if(!crypto.result){
         return;
     }
@@ -43,20 +43,26 @@ const MainCrypto = ({cryptoName}) => {
     OneHChange = selectColorAndIcon(OneHChange);
 
     return (
-        <article key={Id} className="main-crypto">
-            <ul>
-                <li className="name-li">{CoinName}</li>
-                <li style={{color}} className="price-li">
-                    {parseFloat(Price.substring(1).replace(',', '')).toFixed(2)}
-                </li>
-                <li className="points-perc-li">
-                    <div id="arrow">
-                        {oneHChangeIcon}
-                    </div>
-                    <div id="percentage-div">{OneHChange}</div>
-                </li>
-            </ul>
-        </article>
+        <>
+        { loading ? <h2>Loading...</h2> :
+            <article key={Id} className="main-crypto">
+                    <ul>
+                        <li className="name-li">{CoinName}</li>
+                        <li style={{color}} className="price-li">
+                            {parseFloat(Price.substring(1).replace(',', '')).toFixed(2)}
+                        </li>
+                        <li className="points-perc-li">
+                            <div id="arrow">
+                                {oneHChangeIcon}
+                            </div>
+                            <div id="percentage-div">{OneHChange}</div>
+                        </li>
+                    </ul>
+            </article>
+        }
+        </>
+
+
     );
 }
 

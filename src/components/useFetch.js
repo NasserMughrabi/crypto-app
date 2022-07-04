@@ -9,17 +9,19 @@ const keys = {
 	}
 };
 export const useFetch = () => {
+    const [loading, setLoading] = useState(true);
     const [crypto, setCrypto] = useState([]);
 
-    const getProducts = useCallback(async () => {
+    const getCrypto = useCallback(async () => {
     const response = await fetch(url, keys);
     const result = await response.json();
     setCrypto(result);
+    setLoading(false);
     }, [url]);
 
     useEffect(() => {
-        getProducts();
-    }, [url, getProducts]);
+        getCrypto();
+    }, [url, getCrypto]);
 
-    return {crypto};
+    return { loading, crypto };
 };
